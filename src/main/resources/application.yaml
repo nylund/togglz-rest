@@ -1,0 +1,20 @@
+spring.h2.console.enabled: true
+spring.h2.console.path: /h2-console
+
+logging:
+  level:
+    org.togglz: DEBUG
+
+togglz:
+  # Override feature values for local development
+  features:
+    HELLO_WORLD:
+      enabled: true
+  console:
+    enabled: true
+    secured: false
+    use-management-port: false
+    path: /feature-flags
+  cache:
+    enable: true
+    time-to-live: 10000
