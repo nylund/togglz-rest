@@ -1,8 +1,10 @@
-package com.example.togglzservice;
+package com.example.togglzservice.master;
 
+import com.example.togglzservice.MyFeatures;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.togglz.core.manager.EnumBasedFeatureProvider;
 import org.togglz.core.repository.StateRepository;
 import org.togglz.core.repository.cache.CachingStateRepository;
@@ -14,6 +16,7 @@ import org.togglz.core.user.UserProvider;
 import javax.sql.DataSource;
 
 @Configuration
+@Profile("master")
 public class TogglzConfig {
 
     @Autowired
