@@ -55,7 +55,24 @@ public class RestStateRepository implements StateRepository {
                     enabled = jsonResponse.get("enabled").asBoolean();
                 }
 
-                return Optional.of(new FeatureState(feature, enabled));
+                FeatureState state = new FeatureState(feature, enabled);
+
+                if (jsonResponse.has("strategyId")) {
+                    state.setStrategyId(jsonResponse.get("strategyId").asText());
+                }
+
+                if (jsonResponse.has("parameterNames") &&
+                    jsonResponse.has("parameterMap")) {
+
+                    JsonNode parameterMap = jsonResponse.get("parameterMap");
+                    for (JsonNode parameterName : jsonResponse.get("parameterNames")) {
+                        String name = parameterName.asText();
+
+                        state.setParameter(name, parameterMap.get(name).asText());
+                    }
+                }
+
+                return Optional.of(state);
             } catch (IOException e) {
                 log.debug("fetching feature failed", e);
             }
