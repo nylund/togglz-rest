@@ -57,8 +57,13 @@ public class RestStateRepository implements StateRepository {
 
                 FeatureState state = new FeatureState(feature, enabled);
 
+
                 if (jsonResponse.has("strategyId")) {
-                    state.setStrategyId(jsonResponse.get("strategyId").asText());
+                    JsonNode strategy = jsonResponse.get("strategyId");
+
+                    if (!strategy.isNull()) {
+                        state.setStrategyId(strategy.asText());
+                    }
                 }
 
                 if (jsonResponse.has("parameterNames") &&

@@ -1,9 +1,15 @@
-spring.h2.console.enabled: true
-spring.h2.console.path: /h2-console
-
 logging:
   level:
     org.togglz: DEBUG
+
+
+---
+spring.profiles: master
+
+spring.h2.console.enabled: true
+spring.h2.console.path: /h2-console
+
+server.port: 8080
 
 togglz:
   # Override feature values for local development
@@ -18,3 +24,17 @@ togglz:
   cache:
     enable: true
     time-to-live: 10000
+
+
+---
+spring.profiles: client
+
+server.port: 8081
+
+togglz:
+  # Override feature values for local development
+  features:
+    HELLO_WORLD:
+      enabled: true
+  console:
+    enabled: false
